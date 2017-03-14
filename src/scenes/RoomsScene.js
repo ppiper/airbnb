@@ -1,20 +1,29 @@
 import React from 'react';
 import Api from "../Api";
+import room from "../components/room/room";
 import {
   View,
   Text,
   Button,
   StyleSheet,
   ListView,
+  Dimensions,
   Image,
 } from 'react-native';
+import {
+  Actions,
+} from 'react-native-router-flux';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
   }
 });
+
+let {
+  height,
+  width,
+} = Dimensions.get('window');
 
 class RoomsScene extends React.Component {
 
@@ -35,8 +44,8 @@ class RoomsScene extends React.Component {
           dataSource: this.state.dataSource.cloneWithRows(rooms.rooms)
         });
       });
-
     }
+
 
     renderItem(rowData) {
       return (
@@ -44,13 +53,19 @@ class RoomsScene extends React.Component {
             marginTop : 100,
             flex:1,
             position:'relative',
+
           }}>
+          <View style={{
+              alignItems:'center',
+            }}>
           <Image
             source={{uri:rowData.photos[0]}}
             style={{
               width:345,
-              height:200,
+              height:160,
+              bottom:10,
               }}/>
+          </View>
           <Text>{rowData.title}</Text>
           <Text>{rowData.ratingValue}</Text>
           <Text>{rowData.reviews}</Text>
@@ -62,8 +77,20 @@ class RoomsScene extends React.Component {
             width:40,
             height:40,
             right:30,
-            top:200,
+            top:180,
             }}/>
+            <Button
+              title={'Go to Room'}
+              onPress={() => Actions.room({
+                 price:rowData.price,
+                 description:rowData.price,
+                 ratingValue:rowData.ratingValue,
+                 title:rowData.title,
+                 user:rowData.user,
+                 _id:rowData._id,
+                 reviews:rowData.reviews,
+                 photos:rowData.photos,
+               })} />
         </View>
       );
     }
@@ -85,6 +112,7 @@ class RoomsScene extends React.Component {
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderItem} />
+
       </View>
     );
   }
