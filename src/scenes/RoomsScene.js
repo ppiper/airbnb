@@ -1,4 +1,5 @@
 import React from 'react';
+import Api from "../Api";
 import {
   View,
   Text,
@@ -26,26 +27,47 @@ class RoomsScene extends React.Component {
     };
   }
 
-
   componentDidMount() {
     const CITY_ID = 'paris';
       Api.getRooms(CITY_ID, (rooms) => {
+        console.log(rooms.rooms);
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(rooms)
+          dataSource: this.state.dataSource.cloneWithRows(rooms.rooms)
         });
       });
+
     }
 
     renderItem(rowData) {
       return (
-        <View>
+        <View style={{
+            marginTop : 100,
+            flex:1,
+            position:'relative',
+          }}>
+          <Image
+            source={{uri:rowData.photos[0]}}
+            style={{
+              width:345,
+              height:200,
+              }}/>
           <Text>{rowData.title}</Text>
-          <Text>{rowData.description}</Text>
           <Text>{rowData.ratingValue}</Text>
           <Text>{rowData.reviews}</Text>
+          <Image
+          source={{uri:rowData.user.account.photos[0]}}
+          style={{
+            borderRadius:20,
+            position:'absolute',
+            width:40,
+            height:40,
+            right:30,
+            top:200,
+            }}/>
         </View>
       );
     }
+
 
   render() {
 
@@ -53,7 +75,6 @@ class RoomsScene extends React.Component {
       return (
         <View
           style={styles.container}>
-
         </View>
       );
     }

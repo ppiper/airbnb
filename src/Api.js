@@ -112,7 +112,17 @@ class Api {
   }
 
   getRooms(cityId, callback) {
-    fetch(`${Config.host}/api/rooms/${cityId}`)
+    // console.log('test api')
+    console.log("config:", Config.host)
+    console.log("city:", cityId)
+    // fetch(`${Config.host}/api/room/?city=${cityId}`)
+
+    const url = Config.host + '/api/room?city=' + cityId ;
+    // const url = 'http://localhost:3001/api/room?city=paris';
+
+    console.log("url", url)
+
+    fetch(url)
       .then(res => res.json())
         .then((json) => {
           callback(json);

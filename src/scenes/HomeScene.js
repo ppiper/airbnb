@@ -1,4 +1,5 @@
 import React from 'react';
+import RoomsScene from './RoomsScene';
 import {
   View,
   Text,
@@ -20,9 +21,10 @@ const styles = StyleSheet.create({
 class HomeScene extends React.Component {
   render() {
     return (
-      <View
-        style={styles.container}>
-        <RoomsScene/>
+      <View style={{
+          marginTop : 100
+        }}>
+        <Text>hello</Text>
       </View>
     );
   }
