@@ -5,6 +5,7 @@ import {
   View,
   Text,
   Button,
+  TouchableOpacity,
   StyleSheet,
   ListView,
   Dimensions,
@@ -58,13 +59,25 @@ class RoomsScene extends React.Component {
           <View style={{
               alignItems:'center',
             }}>
-          <Image
-            source={{uri:rowData.photos[0]}}
-            style={{
-              width:345,
-              height:160,
-              bottom:10,
-              }}/>
+            <TouchableOpacity onPress={() => Actions.room({
+               price:rowData.price,
+               description:rowData.price,
+               ratingValue:rowData.ratingValue,
+               title:rowData.title,
+               user:rowData.user,
+               _id:rowData._id,
+               reviews:rowData.reviews,
+               photos:rowData.photos,
+             })} >
+             <Image
+               source={{uri:rowData.photos[0]}}
+               style={{
+                 width:345,
+                 height:160,
+                 bottom:10,
+                 }}/>
+                </TouchableOpacity>
+
           </View>
           <Text>{rowData.title}</Text>
           <Text>{rowData.ratingValue}</Text>
@@ -79,18 +92,7 @@ class RoomsScene extends React.Component {
             right:30,
             top:180,
             }}/>
-            <Button
-              title={'Go to Room'}
-              onPress={() => Actions.room({
-                 price:rowData.price,
-                 description:rowData.price,
-                 ratingValue:rowData.ratingValue,
-                 title:rowData.title,
-                 user:rowData.user,
-                 _id:rowData._id,
-                 reviews:rowData.reviews,
-                 photos:rowData.photos,
-               })} />
+
         </View>
       );
     }

@@ -2,9 +2,8 @@ import React from 'react';
 import {
   View,
   Text,
-  Button,
+  Image,
   StyleSheet,
-
 } from 'react-native';
 
 class Room extends React.Component {
@@ -18,27 +17,28 @@ class Room extends React.Component {
       user,
       _id,
       reviews,
-      loc,
       photos,
     } = this.props;
-
-
     return (
       <View>
-        {photos.map((photo, index) => {
-          return (
-            <img key={index} src={photo} />
-          );
-        })}
-        <Text>{title}</Text>
-        <Text>{ratingValue}</Text>
-        <Text>{reviews}</Text>
-        <View
-          style={{
-            height: 500,
-            width: 500,
+        <View style={{
+            marginTop : 100,
+            position:'relative',
+            height:200,
           }}>
-        </View>
+            <Image
+            source={{uri:photos[0]}}
+            style={{
+              width:345,
+              height:160,
+              bottom:10,
+              }}/>
+              <Text>{title}</Text>
+              <Text>{ratingValue}</Text>
+              <Text>{price}</Text>
+              <Text>{description}</Text>
+              <Text>{reviews}</Text>
+          </View>
       </View>
     );
   }
