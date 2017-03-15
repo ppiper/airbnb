@@ -54,20 +54,20 @@ class RoomsScene extends React.Component {
             marginTop : 100,
             flex:1,
             position:'relative',
-
           }}>
           <View style={{
               alignItems:'center',
             }}>
             <TouchableOpacity onPress={() => Actions.room({
                price:rowData.price,
-               description:rowData.price,
+               description:rowData.description,
                ratingValue:rowData.ratingValue,
                title:rowData.title,
                user:rowData.user,
                _id:rowData._id,
                reviews:rowData.reviews,
                photos:rowData.photos,
+               loc:rowData.loc,
              })} >
              <Image
                source={{uri:rowData.photos[0]}}
@@ -97,7 +97,6 @@ class RoomsScene extends React.Component {
       );
     }
 
-
   render() {
 
     if (this.state.dataSource.getRowCount() === 0) {
@@ -114,7 +113,6 @@ class RoomsScene extends React.Component {
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderItem} />
-
       </View>
     );
   }

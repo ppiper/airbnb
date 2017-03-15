@@ -12,13 +12,24 @@ import {
 
 import Rooms from './src/scenes/RoomsScene';
 import Room from './src/components/room/room';
+import User from './src/components/user/user';
+
+const styles = StyleSheet.create({
+  navBar: {
+    backgroundColor: '#FF5A5F', // changing navbar color
+  },
+  navTitle: {
+   color: 'white', // changing navbar title color
+  },
+})
 
 class App extends React.Component {
   render() {
     return (
-      <Router>
+      <Router navigationBarStyle={styles.navBar} titleStyle={styles.navTitle}>
         <Scene key={'rooms'} title={'Rooms'} component={Rooms} />
         <Scene key={'room'} title={'Room'} component={Room} />
+        <Scene key={'user'} title={'User'} component={User} />
       </Router>
     );
   }
