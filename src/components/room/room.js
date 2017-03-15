@@ -16,6 +16,12 @@ import {
   Actions,
 } from 'react-native-router-flux';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  }
+});
+
 class Room extends React.Component {
   render() {
     // console.log('room/Room#render', this.props);
