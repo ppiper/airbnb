@@ -42,7 +42,6 @@ class Room extends React.Component {
       lng: loc[0],
     };
 
-    const markers = [region];
 
     return (
       <View
@@ -83,7 +82,7 @@ class Room extends React.Component {
                     borderRadius:20,
                     width:40,
                     height:40,
-                    right:30,
+                    left:150,
                     top:160,
                     }}/>
                 </TouchableOpacity>
@@ -93,7 +92,7 @@ class Room extends React.Component {
                     width:300,
                   }}
                   region={region}
-                  markers={markers}/>
+                  />
           </View>
       </View>
     );

@@ -13,6 +13,7 @@ import {
 import Rooms from './src/scenes/RoomsScene';
 import Room from './src/components/room/room';
 import User from './src/components/user/user';
+import Login from './src/scenes/LoginScene';
 
 const styles = StyleSheet.create({
   navBar: {
@@ -27,6 +28,7 @@ class App extends React.Component {
   render() {
     return (
       <Router navigationBarStyle={styles.navBar} titleStyle={styles.navTitle}>
+        <Scene key={'login'} title={'Login'} component={Login} />
         <Scene key={'rooms'} title={'Rooms'} component={Rooms} />
         <Scene key={'room'} title={'Room'} component={Room} />
         <Scene key={'user'} title={'User'} component={User} />

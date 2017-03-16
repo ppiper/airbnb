@@ -1,4 +1,5 @@
 import Config from "./Config";
+import Store from 'react-native-simple-store';
 
 class Api {
   constructor() {
@@ -18,13 +19,28 @@ class Api {
     }
   };
 
-  setUser(user) {
-    this.user = user;
-  }
+authenticate(key,{user}) {
+  Store.save(key, {user})
+    .then(() => {
+      console.log('Saved');
+    });
+  this.setUser({user});
+}
 
-  getUser() {
-    return this.user;
-  }
+get(key) {
+  Store.get(key)
+  .then((user) => {
+    console.log(user.username); // Charlemagne
+  });
+}
+
+setUser(user) {
+  this.user = user;
+}
+
+getUser() {
+  return this.user;
+}
 
   isAuthenticated() {
     if (this.user._id) {
@@ -33,10 +49,7 @@ class Api {
     return false;
   }
 
-  authenticate(user) {
-    Cookies.set("user", user);
-    this.setUser(user);
-  }
+
 
   signUp(user, callback) {
     fetch(`${Config.host}/api/user/sign_up`, {
@@ -55,7 +68,9 @@ class Api {
       });
   }
 
+
   logIn(user = {}, callback) {
+
     fetch(`${Config.host}/api/user/log_in`, {
       method: "POST",
       headers: {
@@ -65,18 +80,22 @@ class Api {
     })
       .then(res => res.json())
       .then(json => {
+        console.log(json);
         if (!json.error) {
-          this.authenticate(json);
+          this.authenticate('user',json);
         }
         callback(json);
       });
   }
+
+  /*
 
   logOut(callback) {
     Cookies.remove("user");
     this.setUser(Object.assign({}, this.defaultUser));
     callback();
   }
+
 
   // Authentification obligatoire
   getProfile(profile = {}, callback) {
@@ -97,6 +116,7 @@ class Api {
     }
   }
 
+*/
   getHome(callback) {
     fetch(`${Config.host}/api/home`).then(res => res.json()).then(json => {
       callback(json);
